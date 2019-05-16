@@ -2,28 +2,25 @@
 Used for containing information needed for A*
  */
 public class Node {
+
     private double f, g, h;
-    private int r, c; // row and col
-    private boolean isWall;
+    private int row, col; // row and col
+    private int state;
 
-    public Node(int r, int c, boolean isWall) {
-        this.isWall = isWall;
-        this.r = r;
-        this.c = c;
+    public Node(int r, int c, int state) {
+        this.state = state;
+        row = r;
+        col = c;
     }
 
-    public void heuristic(Node end) {
-        double a = end.getCol();
-        double b = end.getRow();
-        this.h = Math.sqrt(a * a + b * b); // smallest distance to end
-    }
+
 
     public int getRow() {
-        return r;
+        return row;
     }
 
     public int getCol() {
-        return c;
+        return col;
     }
 
     public double getF() {
@@ -50,11 +47,11 @@ public class Node {
         this.h = h;
     }
 
-    public boolean getState() {
-        return isWall;
+    public int getState() {
+        return state;
     }
 
-    public void setState(boolean isWall) {
-        this.isWall = isWall;
+    public void setState(int state) {
+        this.state = state;
     }
 }

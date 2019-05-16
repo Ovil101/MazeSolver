@@ -3,14 +3,15 @@ Entry point for the program
  */
 public class Main {
     public static void main(String[] args) {
-        ImageConverter a = new ImageConverter("C:\\Users\\rlioy\\documents\\tiny.bmp");
-        Node[][] nodes = a.to2Darray();
+        ImageConverter a = new ImageConverter("C:\\Users\\rlioy\\documents\\java\\Maze\\src\\mazes\\small.png");
+        long start = System.nanoTime();
 
-        for (Node[] i : nodes) {
-            for (Node k : i) {
-                System.out.print(" " + k);
-            }
-            System.out.println();
-        }
+        Node[][] nodes = a.to2Darray();
+        a.toImage(nodes);
+
+        long end = System.nanoTime();
+
+        System.out.println((end-start)/1e9);
+
     }
 }
