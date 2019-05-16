@@ -64,8 +64,6 @@ public class ImageConverter {
         final int BLACK = new Color(0, 0, 0).getRGB();
         final int WHITE = new Color(255, 255, 255).getRGB();
 
-
-
         for (int i = 0; i < x; i++) { //c convert to BufferedImage
             for (int j = 0; j < y; j++) {
                 if (graph[i][j].getState() == 0) { // empty path

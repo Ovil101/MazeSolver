@@ -13,8 +13,6 @@ public class Node {
         col = c;
     }
 
-
-
     public int getRow() {
         return row;
     }
