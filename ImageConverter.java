@@ -58,8 +58,8 @@ public class ImageConverter {
 
     public void toImage(Node[][] graph) { // converts to image and saves it at location from constructor
         BufferedImage image = new BufferedImage(x, y, BufferedImage.TYPE_INT_RGB);
-        int index = path.lastIndexOf("\\");
-        File file = new File(path.substring(0, index) + "\\solved.png");
+        int index = path.lastIndexOf("/");
+        File file = new File(path.substring(0, index) + "/solved.png");
         final int RED = new Color(255, 0, 0).getRGB();
         final int BLACK = new Color(0, 0, 0).getRGB();
         final int WHITE = new Color(255, 255, 255).getRGB();
@@ -75,6 +75,8 @@ public class ImageConverter {
                 }
             }
         }
+
+        image.setRGB(1,0,RED);
 
         try {
             ImageIO.write(image, "png", file);

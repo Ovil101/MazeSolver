@@ -3,7 +3,7 @@ Entry point for the program
  */
 public class Main {
     public static void main(String[] args) {
-        ImageConverter a = new ImageConverter("C:\\Users\\rlioy\\documents\\java\\Maze\\src\\mazes\\small.png");
+        ImageConverter a = new ImageConverter("/mnt/d/libraries/documents/java/maze/MazeSolver/mazes/small.png");
         long start = System.nanoTime();
 
         Node[][] nodes = a.to2Darray();
