@@ -30,7 +30,7 @@ public class ImageConverter {
     public Node[][] to2Darray() { // nested loop does [j][i] as [i][j] reflects along line from top left to bot right
         Node[][] nodes = new Node[x][y];
 
-        for (int i = 0; i < nodes.length; i++){ // fix null pointer
+        for (int i = 0; i < nodes.length; i++){ // inital assignment/null pointer
             for (int j = 0; j < nodes.length; j++){
                 nodes[i][j] = new Node(i,j,0); // the [j][i] thing doesn't matter here
             }
@@ -41,12 +41,15 @@ public class ImageConverter {
                 Color t = new Color(image.getRGB(i, j));
                 if (t.equals(Color.BLACK)) {
                     nodes[j][i].setState(1); //black pixels are walls
-                } else if (t.equals(Color.WHITE)) {
+                } 
+                else if (t.equals(Color.WHITE)) {
                     nodes[j][i].setState(0); //white pixels are paths
-                } else { // is not black or white
+                } 
+                else { // is not black or white
                     try {
                         throw new Exception("Pixel at [" + i + "][" + j + "]" + " is not black or white");
-                    } catch (Exception e) {
+                    } 
+                    catch (Exception e) {
                         System.out.println("Java threw an exception while throwing an exception. God help you" +
                                 " if you ever see this. But if you do, there might be a pixel in the maze that is not b/w");
                     }
@@ -68,9 +71,11 @@ public class ImageConverter {
             for (int j = 0; j < y; j++) {
                 if (graph[i][j].getState() == 0) { // empty path
                     image.setRGB(j, i, WHITE);
-                } else if (graph[i][j].getState() == 1) { // wall
+                } 
+                else if (graph[i][j].getState() == 1) { // wall
                     image.setRGB(j, i, BLACK);
-                } else if (graph[i][j].getState() == 2) { // solved path
+                } 
+                else if (graph[i][j].getState() == 2) { // solved path
                     image.setRGB(j, i, RED);
                 }
             }
@@ -78,7 +83,8 @@ public class ImageConverter {
 
         try {
             ImageIO.write(image, "png", file);
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
