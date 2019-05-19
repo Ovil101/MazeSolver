@@ -1,13 +1,18 @@
 /*
 Class for converting between Node[][] and BufferedImage
- */
 
+Each BufferedImage is converted to a Node[][], where each Node object
+is a pixel of the original input image
+ */
+package MazeSolver;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+
+
 
 public class ImageConverter {
 
@@ -19,12 +24,13 @@ public class ImageConverter {
     public ImageConverter(String path) {
         try {
             image = ImageIO.read(new FileInputStream(path));
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
         }
         this.path = path;
-        x = image.getWidth(); // done for readability of to2Darray()
-        y = image.getHeight();
+        this.x = image.getWidth(); // done for readability of to2Darray()
+        this.y = image.getHeight();
     }
 
     public Node[][] to2Darray() { // nested loop does [j][i] as [i][j] reflects along line from top left to bot right
@@ -56,18 +62,52 @@ public class ImageConverter {
                 }
             }
         }
+
+        for (int row = 0; row < x; row++){ // add neighbors, if neighbor does not exist (out of bounds) it makes it null
+            for (int col = 0; col < y; col++){
+                try{
+                    nodes[row][col].addNeighbor(nodes[row-1][col]); // Node to the top
+                }
+                catch (IndexOutOfBoundsException e){
+                    nodes[row][col].addNeighbor(null);
+                }
+
+                try{
+                    nodes[row][col].addNeighbor(nodes[row][col+1]); // Node to the right
+                }
+                catch (IndexOutOfBoundsException e){
+                    nodes[row][col].addNeighbor(null);
+                }
+
+                try{
+                    nodes[row][col].addNeighbor(nodes[row+1][col]); // Node to the bottom
+                }
+                catch (IndexOutOfBoundsException e){
+                    nodes[row][col].addNeighbor(null);
+                }
+
+                try{
+                    nodes[row][col].addNeighbor(nodes[row][col-1]); // Node to the left
+                }
+                catch (IndexOutOfBoundsException e){
+                    nodes[row][col].addNeighbor(null);
+                }
+            }
+        }
+
         return nodes;
     }
 
     public void toImage(Node[][] graph) { // converts to image and saves it at location from constructor
         BufferedImage image = new BufferedImage(x, y, BufferedImage.TYPE_INT_RGB);
-        int index = path.lastIndexOf("/");
-        File file = new File(path.substring(0, index) + "/solved.png");
-        final int RED = new Color(255, 0, 0).getRGB();
+        int index = path.lastIndexOf("\\"); // change this to \\ if on Windows
+        File file = new File(path.substring(0, index) + "\\solved.png"); // remove the filename from filepath
+        
+        final int RED = new Color(255, 0, 0).getRGB(); // for readability
         final int BLACK = new Color(0, 0, 0).getRGB();
         final int WHITE = new Color(255, 255, 255).getRGB();
 
-        for (int i = 0; i < x; i++) { //c convert to BufferedImage
+        for (int i = 0; i < x; i++) { // convert to BufferedImage
             for (int j = 0; j < y; j++) {
                 if (graph[i][j].getState() == 0) { // empty path
                     image.setRGB(j, i, WHITE);

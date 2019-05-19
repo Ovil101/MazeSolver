@@ -1,11 +1,16 @@
 /*
 Used for containing information needed for A*
  */
+package MazeSolver;
+
+import java.util.ArrayList;
+
 public class Node {
 
     private double f, g, h;
     private int row, col; // row and col
     private int state;
+    private ArrayList<Node> neighbors = new ArrayList<>();
 
     public Node(int r, int c, int state) {
         this.state = state;
@@ -51,5 +56,30 @@ public class Node {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public void addNeighbor(Node b){
+        neighbors.add(b);
+    }
+
+    @Override
+    public String toString(){
+        return "["+row+"]["+col+"]";
+    }
+
+    public ArrayList<Node> getNeighbors(){
+        return neighbors;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o ==this){
+            return true;
+        }
+        if (!(o instanceof Node)){
+            return false;
+        }
+        Node n = (Node) o;
+        return row == n.getRow() && col==n.getRow();
     }
 }
