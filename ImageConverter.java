@@ -15,7 +15,7 @@ public class ImageConverter {
     private int x;
     private int y;
     private String path;
-
+    
     public ImageConverter(String path) {
         try {
             image = ImageIO.read(new FileInputStream(path));
@@ -75,8 +75,6 @@ public class ImageConverter {
                 }
             }
         }
-
-        image.setRGB(1,0,RED);
 
         try {
             ImageIO.write(image, "png", file);
