@@ -9,11 +9,12 @@ public class Node {
 
     private double f, g, h;
     private int row, col; // row and col
-    private int state;
+    private boolean isWall = false;
     private ArrayList<Node> neighbors = new ArrayList<>();
+    private Node previous = null;
 
-    public Node(int r, int c, int state) {
-        this.state = state;
+    public Node(int r, int c, boolean isWall) {
+        this.isWall = isWall;
         row = r;
         col = c;
     }
@@ -50,16 +51,24 @@ public class Node {
         this.h = h;
     }
 
-    public int getState() {
-        return state;
+    public boolean getState() {
+        return isWall;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setState(boolean isWall) {
+        this.isWall= isWall;
     }
 
     public void addNeighbor(Node b){
         neighbors.add(b);
+    }
+
+    public void setPrevious(Node n){
+        previous = n;
+    }
+
+    public Node getPrevious(){
+        return previous;
     }
 
     @Override

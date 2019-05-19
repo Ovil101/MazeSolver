@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-
+import java.util.ArrayList;
 
 
 public class ImageConverter {
@@ -38,7 +38,7 @@ public class ImageConverter {
 
         for (int i = 0; i < nodes.length; i++){ // inital assignment/null pointer
             for (int j = 0; j < nodes.length; j++){
-                nodes[i][j] = new Node(i,j,0); // the [j][i] thing doesn't matter here
+                nodes[i][j] = new Node(i,j,false); // the [j][i] thing doesn't matter here
             }
         }
 
@@ -46,10 +46,10 @@ public class ImageConverter {
             for (int j = 0; j < y; j++) {
                 Color t = new Color(image.getRGB(i, j));
                 if (t.equals(Color.BLACK)) {
-                    nodes[j][i].setState(1); //black pixels are walls
+                    nodes[j][i].setState(true); //black pixels are walls
                 } 
                 else if (t.equals(Color.WHITE)) {
-                    nodes[j][i].setState(0); //white pixels are paths
+                    nodes[j][i].setState(false); //white pixels are paths
                 } 
                 else { // is not black or white
                     try {
@@ -98,8 +98,8 @@ public class ImageConverter {
         return nodes;
     }
 
-    public void toImage(Node[][] graph) { // converts to image and saves it at location from constructor
-        BufferedImage image = new BufferedImage(x, y, BufferedImage.TYPE_INT_RGB);
+    public void toImage(Node[][] graph, ArrayList<Node> solution) { // converts to image and saves it at location from constructor
+        BufferedImage imageCopy = this.image;
         int index = path.lastIndexOf("\\"); // change this to \\ if on Windows
         File file = new File(path.substring(0, index) + "\\solved.png"); // remove the filename from filepath
         
@@ -107,16 +107,22 @@ public class ImageConverter {
         final int BLACK = new Color(0, 0, 0).getRGB();
         final int WHITE = new Color(255, 255, 255).getRGB();
 
-        for (int i = 0; i < x; i++) { // convert to BufferedImage
+        /*for (int i = 0; i < x; i++) { // convert to BufferedImage
             for (int j = 0; j < y; j++) {
                 if (graph[i][j].getState() == 0) { // empty path
                     image.setRGB(j, i, WHITE);
-                } 
+                }
                 else if (graph[i][j].getState() == 1) { // wall
                     image.setRGB(j, i, BLACK);
-                } 
-                else if (graph[i][j].getState() == 2) { // solved path
-                    image.setRGB(j, i, RED);
+                }
+                if
+            }
+        }*/
+        for (int i = 0; i < x; i++) { // convert to BufferedImage
+            for (int j = 0; j < y; j++) {
+                System.out.println(i+" "+j);
+                if (solution.contains(graph[j][i])){
+                    imageCopy.setRGB(i,j,RED);
                 }
             }
         }
