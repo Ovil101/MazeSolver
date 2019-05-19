@@ -1,6 +1,9 @@
 /*
 Implementation of the A* pathfinding algorithm
  */
+
+import java.util.ArrayList;
+
 public class Solver {
 
     private Node[][] graph;
@@ -9,7 +12,11 @@ public class Solver {
         this.graph = graph;
     }
 
-    public void aStar(){ // solves maze using A*
+    public void aStar(Node start, Node finish){ // solves maze using A*
+    	ArrayList<Node> checked = new ArrayList<>();
+    	ArrayList<Node> open = new ArrayList<>(start);
+    	ArrayList<Node> backtrack = new ArrayList<>();
+    	gScore = 
 
     }
 
