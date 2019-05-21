@@ -9,9 +9,9 @@ public class Node {
 
     private double f, g, h;
     private int row, col; // row and col
-    private boolean isWall = false;
+    private boolean isWall;
     private ArrayList<Node> neighbors = new ArrayList<>();
-    private Node previous = null;
+    private Node previous = null; // default is null due to backtracking
 
     public Node(int r, int c, boolean isWall) {
         this.isWall = isWall;
