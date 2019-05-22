@@ -19,7 +19,7 @@ public class ImageConverter {
     private BufferedImage image;
     private int x;
     private int y;
-    private String path;
+    private final String path;
     
     public ImageConverter(String path) {
         try {
@@ -46,10 +46,10 @@ public class ImageConverter {
             for (int j = 0; j < y; j++) {
                 Color t = new Color(image.getRGB(i, j));
                 if (t.equals(Color.BLACK)) {
-                    nodes[j][i].setState(true); //black pixels are walls
+                    nodes[j][i].setIsWall(true); //black pixels are walls
                 } 
                 else if (t.equals(Color.WHITE)) {
-                    nodes[j][i].setState(false); //white pixels are paths
+                    nodes[j][i].setIsWall(false); //white pixels are paths
                 } 
                 else { // is not black or white
                     try {
@@ -81,6 +81,7 @@ public class ImageConverter {
 
                 try{
                     nodes[row][col].addNeighbor(nodes[row+1][col]); // Node to the bottom
+                    //System.out.println(row+" "+col+" try 3");
                 }
                 catch (IndexOutOfBoundsException e){
                     nodes[row][col].addNeighbor(null);
@@ -88,9 +89,10 @@ public class ImageConverter {
 
                 try{
                     nodes[row][col].addNeighbor(nodes[row][col-1]); // Node to the left
+                    //System.out.println(row+" "+col+" try 4");
                 }
                 catch (IndexOutOfBoundsException e){
-                    nodes[row][col].addNeighbor(null);
+                    //System.out.println(row+" "+col+" catch 4");
                 }
             }
         }
@@ -99,28 +101,14 @@ public class ImageConverter {
     }
 
     public void toImage(Node[][] graph, ArrayList<Node> solution) { // converts to image and saves it at location from constructor
-        BufferedImage imageCopy = this.image;
+        BufferedImage imageCopy = this.image; // writing to copy image rather than rebuilding the image
         int index = path.lastIndexOf("\\"); // change this to \\ if on Windows
         File file = new File(path.substring(0, index) + "\\solved.png"); // remove the filename from filepath
-        
         final int RED = new Color(255, 0, 0).getRGB(); // for readability
-        final int BLACK = new Color(0, 0, 0).getRGB();
-        final int WHITE = new Color(255, 255, 255).getRGB();
 
-        /*for (int i = 0; i < x; i++) { // convert to BufferedImage
-            for (int j = 0; j < y; j++) {
-                if (graph[i][j].getState() == 0) { // empty path
-                    image.setRGB(j, i, WHITE);
-                }
-                else if (graph[i][j].getState() == 1) { // wall
-                    image.setRGB(j, i, BLACK);
-                }
-                if
-            }
-        }*/
         for (int i = 0; i < x; i++) { // convert to BufferedImage
             for (int j = 0; j < y; j++) {
-                System.out.println(i+" "+j);
+                System.out.println(solution);
                 if (solution.contains(graph[j][i])){
                     imageCopy.setRGB(i,j,RED);
                 }
@@ -130,8 +118,26 @@ public class ImageConverter {
         try {
             ImageIO.write(image, "png", file);
         } 
-        catch (IOException e) {
+        catch (IOException e) { // something went wrong with writing image
             e.printStackTrace();
         }
+    }
+
+    public Node findEndNode(Node[][] graph){
+        for (int i = 0; i < y; i++){
+            if (!graph[y-1][i].isWall()){
+                return graph[y-1][i];
+            }
+        }
+        return null;
+    }
+
+    public Node findStartNode(Node[][] graph){
+        for (int i = 0; i < y; i++){
+            if (!graph[0][i].isWall()){
+                return graph[0][i];
+            }
+        }
+        return null;
     }
 }
