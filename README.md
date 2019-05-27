@@ -12,4 +12,4 @@ Input image must
 
 - be a black and white image. 
 - have walls that are black and paths that are white.
-- The start must be in the top row and the finish must be in the bottom row
+- start in the top row and finish in the bottom row
