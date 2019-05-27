@@ -15,8 +15,8 @@ public class Node {
 
     public Node(int r, int c, boolean isWall) {
         this.isWall = isWall;
-        row = r;
-        col = c;
+        this.row = r;
+        this.col = c;
     }
 
     public int getRow() {
@@ -51,44 +51,44 @@ public class Node {
         this.h = h;
     }
 
-    public boolean getState() {
+    public boolean isWall() {
         return isWall;
     }
 
-    public void setState(boolean isWall) {
-        this.isWall= isWall;
+    public void setIsWall(boolean isWall) {
+        this.isWall = isWall;
     }
 
-    public void addNeighbor(Node b){
+    public void addNeighbor(Node b) {
         neighbors.add(b);
     }
 
-    public void setPrevious(Node n){
+    public void setPrevious(Node n) {
         previous = n;
     }
 
-    public Node getPrevious(){
+    public Node getPrevious() {
         return previous;
     }
 
     @Override
-    public String toString(){
-        return "["+row+"]["+col+"]";
+    public String toString() { // for debugging
+        return "[" + row + "][" + col + "]";
     }
 
-    public ArrayList<Node> getNeighbors(){
+    public ArrayList<Node> getNeighbors() {
         return neighbors;
     }
 
     @Override
-    public boolean equals(Object o){
-        if (o ==this){
+    public boolean equals(Object obj) {
+        if (obj == this) {
             return true;
         }
-        if (!(o instanceof Node)){
+        if (!(obj instanceof Node)) {
             return false;
         }
-        Node n = (Node) o;
-        return row == n.getRow() && col==n.getRow();
+        Node n = (Node) obj;
+        return row == n.getRow() && col == n.getCol();
     }
 }
