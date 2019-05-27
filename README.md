@@ -8,6 +8,8 @@ Uses the [A* pathfinding algorithm](https://en.wikipedia.org/wiki/A*_search_algo
 
 # Input
 
-Input image must be a black and white image. The walls are black, and the paths are white.
+Input image must
 
-The start must be in the top row and the finish must be in the bottom row, although this can be easily changed.
+- be a black and white image. 
+- have walls that are black and paths that are white.
+- The start must be in the top row and the finish must be in the bottom row
