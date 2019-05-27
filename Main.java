@@ -1,17 +1,17 @@
 /*
 Entry point for the program
  */
+
+package MazeSolver;
+
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        ImageConverter a = new ImageConverter("/mnt/d/libraries/documents/java/maze/MazeSolver/mazes/small.png");
-        long start = System.nanoTime();
-
+        ImageConverter a = new ImageConverter("path\\to\\file");
         Node[][] nodes = a.to2Darray();
-        a.toImage(nodes);
-
-        long end = System.nanoTime();
-
-        System.out.println((end-start)/1e9);
-
+        Solver solve = new Solver(nodes);
+        ArrayList<Node> solution = solve.aStar(a.findStartNode(nodes), a.findEndNode(nodes));
+        a.toImage(nodes, solution);
     }
 }
