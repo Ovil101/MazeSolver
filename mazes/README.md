@@ -12,7 +12,7 @@ combo400 took less than 15 seconds (usually around 13-14 seconds). combo6k
 
 perfect2k ran for an hour and then I gave up. I'm not even going to bother trying perfect4k, perfect10k, and perfect15k. These only have one solution.
 
-Braid200 took ----. Braid2k took -------.
+Braid200 took around 1.4 seconds.
 
 100x100 is solved in around 1.7 seconds.
 
