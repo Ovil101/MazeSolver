@@ -6,6 +6,7 @@ is a pixel of the original input image
  */
 package MazeSolver;
 
+import java.io.FileNotFoundException;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,7 +28,7 @@ public class ImageConverter {
             image = ImageIO.read(new FileInputStream(path));
         }
         catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("File does not exist, check path or filename");
         }
         this.path = path;
         this.width = image.getWidth(); // done for readability of to2Darray()
