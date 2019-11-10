@@ -1,6 +1,7 @@
-package MazeSolver;/*
+/*
 Implementation of the A* pathfinding algorithm
  */
+package MazeSolver;
 
 import java.util.ArrayList;
 
