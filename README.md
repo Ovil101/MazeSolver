@@ -20,4 +20,4 @@ Input image must
 2. Move to where ever you want to run it form
 3. Compile package from **directory above** file containing MazeSolver folder, such as `javac MazeSolver/*.java`
 4. Run using `java MazeSolver.MazeSolver "path/to/image"`
-5. Program outputs an image named `solved.png` in the same directory as a input image
+5. Program outputs an image named `solved.png` in the directory it is ran from
