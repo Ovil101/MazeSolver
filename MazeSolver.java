@@ -9,14 +9,13 @@ import java.util.ArrayList;
 public class MazeSolver {
     public static void main(String[] args) {
         ImageConverter a = new ImageConverter(args[0]);
-        Node[][] nodes = a.to2Darray(); // image to 
+        Node[][] nodes = a.to2Darray();
         Solver solve = new Solver(nodes);
 
         long start = System.nanoTime();
         System.out.println("Solving using A* pathfinding");
         
-
-        ArrayList<Node> solution = solve.aStar(a.findStartNode(nodes), a.findEndNode(nodes)); // olve maze
+        ArrayList<Node> solution = solve.aStar(a.findStartNode(nodes), a.findEndNode(nodes)); // solve maze
         if (solution == null){
             System.out.println("No solution found");
         }

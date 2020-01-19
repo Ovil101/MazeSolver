@@ -29,6 +29,7 @@ public class ImageConverter {
         }
         catch (IOException e) {
             System.err.println("File does not exist, check path or filename");
+            System.exit(0);
         }
         this.path = path;
         this.width = image.getWidth(); // done for readability of to2Darray()
@@ -109,7 +110,16 @@ public class ImageConverter {
      */
     public void toImage(Node[][] graph, ArrayList<Node> solution) { // converts to image and saves it at location from constructor
         BufferedImage ret = new BufferedImage(graph[0].length, graph.length, BufferedImage.TYPE_INT_RGB);
-        int index = path.lastIndexOf("/"); // change this according to your OS path convention
+        
+        // find OS because windows is a special cookie
+        int index;
+        if (System.getProperty("os.name").split(" ")[0].equals("Windows")){
+            index = path.lastIndexOf("\\");
+        }
+        else{
+            index = path.lastIndexOf("/");
+        }
+         // change this according to your OS path convention
         File file = new File(path.substring(0, index) + "/solved.png"); // remove the filename from filepath
         final int RED = new Color(255, 0, 0).getRGB(); // for readability
         final int BLACK = new Color(0, 0, 0).getRGB();
